@@ -2,6 +2,7 @@ import streamlit as st
 import os
 from pathlib import Path
 
+
 # ------------------ CONFIG ------------------
 st.set_page_config(
     page_title="File Manager",
@@ -12,9 +13,14 @@ st.set_page_config(
 BASE_DIR = Path("workspace")
 BASE_DIR.mkdir(exist_ok=True)
 
+
+
+
 # ------------------ HELPERS ------------------
 def list_items():
     return [str(p.relative_to(BASE_DIR)) for p in BASE_DIR.rglob("*")]
+
+
 
 # ------------------ UI ------------------
 st.title("📁 File Management System")
@@ -36,6 +42,8 @@ menu = st.sidebar.radio(
 
 st.divider()
 
+
+
 # ------------------ CREATE FOLDER ------------------
 if menu == "Create Folder":
     st.subheader("📂 Create Folder")
@@ -49,6 +57,8 @@ if menu == "Create Folder":
         else:
             st.error("Folder already exists")
 
+
+
 # ------------------ LIST ------------------
 elif menu == "List Files & Folders":
     st.subheader("📃 Files & Folders")
@@ -59,6 +69,8 @@ elif menu == "List Files & Folders":
             st.write(f"• {i}")
     else:
         st.info("Workspace is empty")
+
+
 
 # ------------------ RENAME FOLDER ------------------
 elif menu == "Rename Folder":
@@ -79,6 +91,8 @@ elif menu == "Rename Folder":
     else:
         st.info("No folders available")
 
+
+
 # ------------------ DELETE FOLDER ------------------
 elif menu == "Delete Folder":
     st.subheader("🗑️ Delete Folder")
@@ -92,6 +106,10 @@ elif menu == "Delete Folder":
             st.success("Folder deleted")
         else:
             st.error("Folder is not empty")
+
+
+
+
 
 # ------------------ CREATE FILE ------------------
 elif menu == "Create File":
@@ -108,6 +126,9 @@ elif menu == "Create File":
         else:
             st.error("File already exists")
 
+
+
+
 # ------------------ READ FILE ------------------
 elif menu == "Read File":
     st.subheader("📖 Read File")
@@ -117,6 +138,9 @@ elif menu == "Read File":
 
     if file:
         st.code(file.read_text(), language="text")
+
+
+
 
 # ------------------ UPDATE FILE ------------------
 elif menu == "Update File":
@@ -153,6 +177,9 @@ elif menu == "Update File":
                 with open(file, "a") as f:
                     f.write(data)
                 st.success("Content appended successfully")
+
+
+
 
 # ------------------ DELETE FILE ------------------
 elif menu == "Delete File":
